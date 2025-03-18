@@ -40,7 +40,6 @@ void decrypt(uint* output, const uint* input, uint size) {
 int main(int argc, char* argv[]) {
     if (argc != 3) {
         std::cout << "Level256 Network 3GX Decrypter by Hidegon <3" << std::endl;
-        std::cout << "Licensed under the WTFPL" << std::endl;
         std::cout << "Usage: " << argv[0] << " <encrypted file name (only the code section)> <output file name>" << std::endl;
         return 1;
     }
