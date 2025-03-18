@@ -15,31 +15,30 @@ void decrypt(uint* output, const uint* input, uint size) {
     }
 
     // Key
-    const uint uVar1    = 0x63DA901F;
+    const uint TMP_DIFF_KEY    = 0x63DA901F;
     const uint XOR_KEY  = 0x4B0C9A12;
     const int DIFF_KEY  = 0x5AE007DF;
 
     // tmp
     uint *file_ptr  = output - 1;
-    uint uVar5      = 0x63DA901F;
-    uint uVar6      = 0x63DA901F;
+    uint pre_key      = 0x63DA901F;
+    uint tmp_key      = 0x63DA901F;
 
     // decryption
-    uint raw_content;
-    uint uVar8;
-    for (uint j = 0; i != j; j = j + 1) {
-        file_ptr++;
-        raw_content = *file_ptr;
-        uVar8 = uVar5 + uVar1;
-        uVar5 = uVar5 + (raw_content ^ XOR_KEY);
-        *file_ptr = uVar6 ^ raw_content ^ j * (uVar6 + DIFF_KEY);
-        uVar6 = uVar8 ^ raw_content;
+    for (uint j = 0; j < i; j++) {
+        uint raw = *(++file_ptr);
+        uint tmp = pre_key + TMP_DIFF_KEY;
+        pre_key += (raw ^ XOR_KEY);
+        *file_ptr = tmp_key ^ raw ^ j * (tmp_key + DIFF_KEY);
+        tmp_key = tmp ^ raw;
     }
+
 }
 
 int main(int argc, char* argv[]) {
     if (argc != 3) {
         std::cout << "Level256 Network 3GX Decrypter by Hidegon <3" << std::endl;
+        std::cout << "Licensed under the WTFPL" << std::endl;
         std::cout << "Usage: " << argv[0] << " <encrypted file name (only the code section)> <output file name>" << std::endl;
         return 1;
     }
