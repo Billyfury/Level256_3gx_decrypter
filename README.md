@@ -4,7 +4,7 @@ A decryption tool for Level256 Network's 3GX
 ## Usage
 
 ```
-Usage: ./a.out <encrypted file name (only the code section)> <output file name>
+Usage: ./a.out <encrypted file name> <output file name>
 ```
 
 ## Build
